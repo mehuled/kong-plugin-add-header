@@ -67,7 +67,7 @@ function plugin:access(plugin_conf)
 
     _G.emmy = {}
     _G.emmy.fixPath = function(path)
-        return string.gsub(path, '/usr/local/kong/plugins/', '/Users/mehul.sharma/poc/edde/')
+        return string.gsub(path, '/usr/local/kong/plugins/', '/[PATH_TO_REPOSITORY]/')
     end
 
     package.cpath = package.cpath .. ';/usr/local/emmy/?.so'

@@ -65,6 +65,18 @@ end --]]
 -- runs in the 'access_by_lua_block'
 function plugin:access(plugin_conf)
 
+    _G.emmy = {}
+    _G.emmy.fixPath = function(path)
+        return string.gsub(path, '/usr/local/kong/plugins/', '/Users/mehul.sharma/poc/edde/')
+    end
+
+    package.cpath = package.cpath .. ';/usr/local/emmy/?.so'
+    local dbg = require('emmy_core')
+    dbg.tcpListen('localhost', 9966)
+
+    -- Wait for IDE connection
+    dbg.waitIDE()
+
     -- your custom code here
     kong.log.inspect(plugin_conf)   -- check the logs for a pretty-printed config!
     kong.service.request.set_header(plugin_conf.request_header, "this is on a request")
